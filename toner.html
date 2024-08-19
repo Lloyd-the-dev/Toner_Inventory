@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toners</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .head{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 60%;
+            margin-left: -20rem;
+        }
+        .home{
+            text-decoration: none;
+            color: black;
+            transition: 1s ease-in-out;
+        }
+        .home:hover{
+            color: purple;
+        }
+        .head h1{
+            font-weight: 800;
+            font-size: 2rem;
+        }
+        #tonerTable {
+            margin: 50px auto 0 auto;
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+            color: black;
+        }
+
+        #tonerTable td, #tonerTable th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+ 
+        #tonerTable tr{
+            background-color: white;
+        }
+        #tonerTable tr:hover {
+            background-color: #ddd;
+        }
+
+        #tonerTable th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: dodgerblue;
+            color: white;
+        }
+        #tonerTable a{
+            color: black;
+            text-decoration: none;
+            text-transform: capitalize;
+
+        }
+        #tonerTable i{
+            color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="head">
+        <a href="./dashboard.php" class="home"><i class='bx bx-arrow-back'></i>Back to home</a>
+        <h1>The Toner Inventory Table</h1>
+    </div>
+    <table id="tonerTable">
+        <thead>
+            <tr>
+                <!-- <th>Edit</th> -->
+                <th>Toner Name</th>
+                <th>Quantity available</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+</table>
+
+
+<script src="./js/toner.js"></script>
+</body>
+</html>

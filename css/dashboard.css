@@ -1,0 +1,27 @@
+body{
+    font-family: "Montserrat", sans-serif;
+}
+.welcome_heading{
+    background-image: url("../images/dark-background.jpg");
+    background-size: cover;
+    height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.welcome_heading h2{
+    font-size: 6rem;
+    font-weight: 700;
+    text-shadow: 0px 0px 20px #242424;
+}
+.form_heading{
+    text-align: center;
+    margin-top: 15rem;
+}
+.dashboard_form{
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 15rem;
+}

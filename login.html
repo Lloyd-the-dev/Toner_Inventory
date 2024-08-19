@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+
+<body>
+    <section class="wrapper">
+        <div class="form signup">
+          <header>TonerLOG</header> 
+          <h2>Toner records do not have to be stressful and manual anymore!</h2>
+          <ul>
+            <li>Automate tracking and reporting for effortless inventory control</li>
+            <li>Accurately log toner usage and movements with minimal manual imput</li>
+            <li>Easily submit and manage toner requests, reducing delays and miscommunication</li>
+            <li>View and manage all toner-related activity in one intuitive interface</li>
+            <li>Maintain a clear record of toner movements and usage for regulatory purposes</li>
+          </ul>
+        </div>
+  
+        <div class="form login">
+          <header>Login</header>
+          <form action="login.php" method="POST">
+            <input type="text" placeholder="Email address" name="email" required />
+            <input type="password" placeholder="Password" name="password" required />
+            <a href="#">Forgot password?</a>
+            <button class="login-btn" type="submit" name="submit">login</button>
+          </form>
+        </div>
+  
+        <script>
+          const wrapper = document.querySelector(".wrapper"),
+            signupHeader = document.querySelector(".signup header"),
+            loginHeader = document.querySelector(".login header");
+  
+          loginHeader.addEventListener("click", () => {
+            wrapper.classList.add("active");
+          });
+          signupHeader.addEventListener("click", () => {
+            wrapper.classList.remove("active");
+          });
+        </script>
+      </section>
+</body>
+</html>
