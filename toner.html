@@ -92,7 +92,38 @@
             </tr>
         </thead>
         <tbody></tbody>
-</table>
+    </table>
+    <!-- Toner Request Modal -->
+    <div class="modal fade" id="tonerRequestModal" tabindex="-1" role="dialog" aria-labelledby="tonerRequestModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="tonerRequestModalLabel">Request Toner</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            <form id="tonerRequestForm">
+                <div class="form-group">
+                <label for="tonerName">Toner Name</label>
+                <input type="text" class="form-control" id="tonerName" name="tonerName" readonly>
+                </div>
+                <div class="form-group">
+                <label for="requestQuantity">Quantity</label>
+                <input type="number" class="form-control" id="requestQuantity" name="requestQuantity" min="1" required>
+                </div>
+                <input type="hidden" id="tonerId" name="tonerId">
+            </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="submitRequest">Request Toner</button>
+            </div>
+        </div>
+        </div>
+    </div>
+  
 
 
 <script src="./js/toner.js"></script>
