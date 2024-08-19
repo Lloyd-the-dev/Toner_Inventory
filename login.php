@@ -13,6 +13,7 @@ include "config.php";
         $_SESSION["user_id"] = $row["User_id"];
         $_SESSION["name"] = $row["Firstname"];
         $_SESSION["mail"] = $row["Email"];
+        $_SESSION["isAdmin"] = $row["is_admin"];
         header("Location: dashboard.php");
         
     }  

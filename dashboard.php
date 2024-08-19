@@ -2,6 +2,7 @@
 include "config.php";
 session_start();
 $userId = $_SESSION["user_id"];
+$isAdmin = $_SESSION["isAdmin"];
 $sql = "SELECT * FROM users WHERE User_id = '$userId'";
 $result = $conn->query($sql);
 
@@ -52,7 +53,9 @@ if ($result->num_rows > 0) {
 </nav>
 
     <div class="welcome_heading">
-        <h2>Welcome, <?php echo $name; ?></h2>
+        <h2>Welcome, <?php echo $name; ?><?php if($isAdmin) {
+          echo "(ADMIN)";
+        }?></h2>
     </div>
 
     
