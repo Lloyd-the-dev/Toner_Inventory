@@ -37,14 +37,27 @@ if ($result->num_rows > 0) {
         <a class="nav-link mr-8" href="dashboard.php">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="toner.html">toners</a>
+        <a class="nav-link" href="toner.php">toners</a>
+      </li>
+      <?php 
+          if($isAdmin){
+      ?>
+      <li class="nav-item">
+        <a class="nav-link" href="users.php">Users</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="users.html">Users</a>
+        <a class="nav-link" href="adminRequests.php">Requests</a>
       </li>
+      <?php
+       } else {
+      ?>
       <li class="nav-item">
-        <a class="nav-link" href="#">Requests</a>
+        <a class="nav-link" href="requestToner.php">Request Toner</a>
       </li>
+       <?php 
+       }
+       ?>      
+      
       <li class="nav-item">
         <a class="nav-link" href="login.html">Logout</a>
       </li>
@@ -59,7 +72,7 @@ if ($result->num_rows > 0) {
     </div>
 
     
-    <h2 class="form_heading">Add new Item</h2>
+    <h2 class="form_heading">Add new Toner</h2>
     <form action="dashboard.php" method="POST" class="dashboard_form">
         <div class="form-group">
             <label>Toner name</label>

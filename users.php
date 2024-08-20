@@ -1,4 +1,12 @@
+<?php
+include "config.php";
+session_start();
+$userId = $_SESSION["user_id"];
+$isAdmin = $_SESSION["isAdmin"];
+?>
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -55,7 +63,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <!-- Navbar content -->
-        <a class="navbar-brand" href="#">TonerLOG</a>
+        <a class="navbar-brand" href="dashboard.php">TonerLOG</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -66,14 +74,26 @@
               <a class="nav-link mr-8" href="dashboard.php">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="toner.html">toners</a>
+              <a class="nav-link" href="toner.php">toners</a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="users.html">Users</a>
+            <?php 
+                if($isAdmin){
+            ?>
+            <li class="nav-item">
+              <a class="nav-link" href="users.php">Users</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Requests</a>
+              <a class="nav-link" href="adminRequests.php">Requests</a>
             </li>
+            <?php
+            } else {
+            ?>
+            <li class="nav-item">
+              <a class="nav-link" href="requestToner.php">Request Toner</a>
+            </li>
+            <?php 
+            }
+            ?> 
             <li class="nav-item">
               <a class="nav-link" href="login.html">Logout</a>
             </li>
