@@ -4,14 +4,15 @@ include "config.php";
 if (isset($_GET['requestId'])) {
     $requestId = $_GET['requestId'];
 
-    // Fetch the requested toner details
-    $sql = "SELECT Toner_id, RequestQuantity FROM toner_requests WHERE Request_id = $requestId";
+    // Fetch the requested toner details and user who made the request
+    $sql = "SELECT Toner_id, RequestQuantity, userId FROM toner_requests WHERE Request_id = $requestId";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $request = $result->fetch_assoc();
         $tonerId = $request['Toner_id'];
         $requestedQty = $request['RequestQuantity'];
+        $userId = $request['userId']; // Get the user_id who made the request
 
         // Update the toner inventory: reduce the quantity by the requested amount
         $updateInventory = "UPDATE toner_inventory SET TonerQuantity = TonerQuantity - $requestedQty WHERE Toner_id = $tonerId";
@@ -21,7 +22,15 @@ if (isset($_GET['requestId'])) {
             $updateRequestStatus = "UPDATE toner_requests SET RequestStatus = 'Approved' WHERE Request_id = $requestId";
 
             if ($conn->query($updateRequestStatus) === TRUE) {
-                echo json_encode(['success' => true]);
+                // Insert notification for approved request
+                $notificationContent = "Your request for toner has been approved.";
+                $insertNotification = "INSERT INTO notifications (notification_content, user_notified, is_cleared) VALUES ('$notificationContent', $userId, 0)";
+
+                if ($conn->query($insertNotification) === TRUE) {
+                    echo json_encode(['success' => true]);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Failed to insert notification']);
+                }
             } else {
                 echo json_encode(['success' => false, 'message' => 'Failed to update request status']);
             }

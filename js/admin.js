@@ -15,6 +15,7 @@ fetch('getTonerRequests.php')
                     <div>
                         <h5 class="card-title">${request.TonerName}</h5>
                         <p class="card-text">Requested Quantity: ${request.RequestQuantity}</p>
+                        <p class="card-text">Requested By: ${request.userEmail}</p>
                         <p class="card-text"><small class="text-muted">Requested on: ${new Date(request.RequestDate).toLocaleString()}</small></p>
                     </div>
                     <div>

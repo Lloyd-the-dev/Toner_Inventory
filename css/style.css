@@ -1,0 +1,16 @@
+/* General styles will be here */
+.notification-text {
+    display: none;
+}
+#notif-number{
+    color: red;
+}
+
+@media (max-width: 576px) {
+    .notification-icon i {
+        display: none;
+    }
+    .notification-text {
+        display: inline;
+    }
+}
