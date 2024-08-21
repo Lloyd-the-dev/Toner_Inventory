@@ -14,6 +14,7 @@ include "config.php";
         $_SESSION["name"] = $row["Firstname"];
         $_SESSION["mail"] = $row["Email"];
         $_SESSION["isAdmin"] = $row["is_admin"];
+        $_SESSION["isCFO"] = $row["isCFO"];
         header("Location: dashboard.php");
         
     }  

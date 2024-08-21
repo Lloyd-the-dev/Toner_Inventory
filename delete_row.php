@@ -9,7 +9,7 @@ if (isset($_GET["name"]) && isset($_GET["row"])) {
     $deleteQuery = "DELETE FROM toner_inventory WHERE TonerName = '$rowName' AND Toner_id = '$rowId'";
     
     if ($conn->query($deleteQuery) === TRUE) {
-        header("Location: toner.html");
+        header("Location: toner.php");
         exit();
     } else {
         echo "Error deleting row: " . $conn->error;

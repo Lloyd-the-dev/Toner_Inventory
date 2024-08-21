@@ -3,6 +3,7 @@ include "config.php";
 session_start();
 $userId = $_SESSION["user_id"];
 $isAdmin = $_SESSION["isAdmin"];
+$isCFO = $_SESSION["isCFO"];
 ?>
 
 <!DOCTYPE html>
@@ -76,23 +77,24 @@ $isAdmin = $_SESSION["isAdmin"];
               <a class="nav-link" href="toner.php">toners</a>
             </li>
             <?php 
-                if($isAdmin){
+              if($isAdmin){
             ?>
             <li class="nav-item">
-              <a class="nav-link" href="users.html">Users</a>
+              <a class="nav-link" href="users.php">Users</a>
             </li>
+            <?php } ?>
+            <?php if($isAdmin || $isCFO) { ?>
             <li class="nav-item">
-              <a class="nav-link" href="adminRequests.html">Requests</a>
+              <a class="nav-link" href="adminRequests.php">Requests</a>
             </li>
+            <?php } ?>
             <?php
-            } else {
+            if(!$isAdmin && !$isCFO){ 
             ?>
             <li class="nav-item">
               <a class="nav-link" href="requestToner.php">Request Toner</a>
             </li>
-            <?php 
-            }
-            ?> 
+            <?php } ?>  
             <li class="nav-item">
               <a class="nav-link" href="login.html">Logout</a>
             </li>
@@ -104,44 +106,18 @@ $isAdmin = $_SESSION["isAdmin"];
     <table id="tonerTable">
         <thead>
             <tr>
-                <th>Edit</th>
+                <?php if($isAdmin) { ?> 
+                  <th>Edit</t>
+                <?php } ?>
                 <th>Toner Name</th>
                 <th>Quantity available</th>
-                <th>Delete</th>
+                <?php if($isAdmin) { ?> 
+                  <th>Delete</t>
+                <?php } ?>
             </tr>
         </thead>
         <tbody></tbody>
     </table>
-    <!-- Toner Request Modal -->
-    <div class="modal fade" id="tonerRequestModal" tabindex="-1" role="dialog" aria-labelledby="tonerRequestModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="tonerRequestModalLabel">Request Toner</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-            <form id="tonerRequestForm">
-                <div class="form-group">
-                <label for="tonerName">Toner Name</label>
-                <input type="text" class="form-control" id="tonerName" name="tonerName" readonly>
-                </div>
-                <div class="form-group">
-                <label for="requestQuantity">Quantity</label>
-                <input type="number" class="form-control" id="requestQuantity" name="requestQuantity" min="1" required>
-                </div>
-                <input type="hidden" id="tonerId" name="tonerId">
-            </form>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" id="submitRequest">Request Toner</button>
-            </div>
-        </div>
-        </div>
-    </div>
 
     <!-- Edit Toner Modal -->
     <div class="modal fade" id="editTonerModal" tabindex="-1" role="dialog" aria-labelledby="editTonerModalLabel" aria-hidden="true">
@@ -174,6 +150,9 @@ $isAdmin = $_SESSION["isAdmin"];
   
 
 
+    <script>
+        const admin = '<?php echo $isAdmin?>';
+    </script>
 <script src="./js/toner.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

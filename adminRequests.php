@@ -3,6 +3,7 @@ include "config.php";
 session_start();
 $userId = $_SESSION["user_id"];
 $isAdmin = $_SESSION["isAdmin"];
+$isCFO = $_SESSION["isCFO"];
 ?>
 
 <!DOCTYPE html>
@@ -57,20 +58,21 @@ $isAdmin = $_SESSION["isAdmin"];
                 if($isAdmin){
             ?>
             <li class="nav-item">
-              <a class="nav-link" href="users.html">Users</a>
+              <a class="nav-link" href="users.php">Users</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="adminRequests.html">Requests</a>
+            <?php } ?>
+            <?php if($isAdmin || $isCFO) { ?>
+            <li class="nav-item active">
+              <a class="nav-link" href="adminRequests.php">Requests</a>
             </li>
+            <?php } ?>
             <?php
-            } else {
+            if(!$isAdmin && !$isCFO){ 
             ?>
             <li class="nav-item">
               <a class="nav-link" href="requestToner.php">Request Toner</a>
             </li>
-            <?php 
-            }
-            ?> 
+            <?php } ?> 
             <li class="nav-item">
               <a class="nav-link" href="login.html">Logout</a>
             </li>

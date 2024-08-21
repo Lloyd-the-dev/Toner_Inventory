@@ -9,7 +9,7 @@ if (isset($_GET["name"]) && isset($_GET["row"])) {
     $deleteQuery = "DELETE FROM users WHERE Firstname = '$rowName' AND User_id = '$rowId'";
     
     if ($conn->query($deleteQuery) === TRUE) {
-        header("Location: users.html");
+        header("Location: users.php");
         exit();
     } else {
         echo "Error deleting row: " . $conn->error;

@@ -1,6 +1,19 @@
 body{
     font-family: "Montserrat", sans-serif;
 }
+.notification-text {
+    display: none;
+}
+
+@media (max-width: 576px) {
+    .notification-icon i {
+        display: none;
+    }
+    .notification-text {
+        display: inline;
+    }
+}
+
 .welcome_heading{
     background-image: url("../images/dark-background.jpg");
     background-size: cover;
