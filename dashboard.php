@@ -4,22 +4,28 @@ session_start();
 $userId = $_SESSION["user_id"];
 $isAdmin = $_SESSION["isAdmin"];
 $isCFO = $_SESSION["isCFO"];
-$sql = "SELECT * FROM users WHERE User_id = '$userId'";
-$result = $conn->query($sql);
+$firstLogin = $_SESSION["firstLogin"];
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $name = $row['Firstname'];
-    
-}
-$countQuery = "SELECT COUNT(*) as notif_count FROM notifications WHERE user_notified = '$userId' AND is_cleared = 0";
-$result = $conn->query($countQuery);
+if($firstLogin == 1){
+   header("Location: edit_profile.php");
+} else {
+  $sql = "SELECT * FROM users WHERE User_id = '$userId'";
+    $result = $conn->query($sql);
 
-$notif_count = 0;
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $notif_count = $row['notif_count'];
-}
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $name = $row['Firstname'];
+        
+    }
+    $countQuery = "SELECT COUNT(*) as notif_count FROM notifications WHERE user_notified = '$userId' AND is_cleared = 0";
+    $result = $conn->query($countQuery);
+
+    $notif_count = 0;
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $notif_count = $row['notif_count'];
+    }
+  }
 ?>
 
 
@@ -69,7 +75,10 @@ if ($result->num_rows > 0) {
       <li class="nav-item">
         <a class="nav-link" href="requestToner.php">Request Toner</a>
       </li>
-       <?php } ?>      
+       <?php } ?> 
+      <li class="nav-item">
+        <a class="nav-link" href="edit_profile.php">Edit Profile</a>
+      </li>     
       <li class="nav-item">
         <a class="nav-link" href="notifications.php">
           <span class="notification-icon">
@@ -84,7 +93,6 @@ if ($result->num_rows > 0) {
     </ul>
   </div>
 </nav>
-
     <div class="welcome_heading">
         <h2>Welcome, <?php echo $name; ?>
         <?php if($isAdmin) {

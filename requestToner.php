@@ -15,6 +15,10 @@
             margin: 1rem;
             font-size: 2rem;
         }
+        .sub-heading{
+            text-align: center;
+            
+        }
         #tonerTable {
             margin: 50px auto 0 auto;
             font-family: Arial, Helvetica, sans-serif;
@@ -74,6 +78,9 @@
               <a class="nav-link" href="requestToner.php">Request Toner</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="edit_profile.php">Edit Profile</a>
+            </li>   
+            <li class="nav-item">
                 <a class="nav-link" href="notifications.php">
                     <span class="notification-icon">
                         <i class='bx bxs-bell'><span id="notif-number"></span></i>
@@ -89,6 +96,7 @@
     </nav>
     <h1 class="heading">The Toner Inventory Table</h1>
 
+    <p class="sub-heading">Click on desired Row to make a request</p>
     <table id="tonerTable">
         <thead>
             <tr>
@@ -131,6 +139,25 @@
 
   
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          // Get the notification count from PHP
+          var notifCount = <?php echo $notif_count; ?>;
+
+          // Display the count in the span with id 'notif-number'
+          if(notifCount > 0) {
+              document.getElementById("notif-number").textContent = notifCount;
+              document.getElementById("notif-number").style.backgroundColor = "red";
+              document.getElementById("notif-number").style.color = "white";
+              document.getElementById("notif-number").style.borderRadius = "50%";
+              document.getElementById("notif-number").style.padding = ".1rem .3rem";
+              document.getElementById("notif-number").style.position = "absolute";
+              document.getElementById("notif-number").style.top = ".7rem";
+              document.getElementById("notif-number").style.right = "5rem";
+              document.getElementById("notif-number").style.fontSize = ".7rem";
+          }
+      });
+    </script>
 
 <script src="./js/requestToner.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

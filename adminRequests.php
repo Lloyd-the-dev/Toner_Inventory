@@ -75,6 +75,9 @@ $isCFO = $_SESSION["isCFO"];
             </li>
             <?php } ?> 
             <li class="nav-item">
+              <a class="nav-link" href="edit_profile.php">Edit Profile</a>
+            </li>   
+            <li class="nav-item">
               <a class="nav-link" href="notifications.php">
                   <span class="notification-icon">
                       <i class='bx bxs-bell'><span id="notif-number"></span></i>
@@ -94,6 +97,25 @@ $isCFO = $_SESSION["isCFO"];
         <div id="requestsContainer"></div>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          // Get the notification count from PHP
+          var notifCount = <?php echo $notif_count; ?>;
+
+          // Display the count in the span with id 'notif-number'
+          if(notifCount > 0) {
+              document.getElementById("notif-number").textContent = notifCount;
+              document.getElementById("notif-number").style.backgroundColor = "red";
+              document.getElementById("notif-number").style.color = "white";
+              document.getElementById("notif-number").style.borderRadius = "50%";
+              document.getElementById("notif-number").style.padding = ".1rem .3rem";
+              document.getElementById("notif-number").style.position = "absolute";
+              document.getElementById("notif-number").style.top = ".7rem";
+              document.getElementById("notif-number").style.right = "5rem";
+              document.getElementById("notif-number").style.fontSize = ".7rem";
+          }
+      });
+    </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7HUIbX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

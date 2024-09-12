@@ -15,6 +15,7 @@ include "config.php";
         $_SESSION["mail"] = $row["Email"];
         $_SESSION["isAdmin"] = $row["is_admin"];
         $_SESSION["isCFO"] = $row["isCFO"];
+        $_SESSION["firstLogin"] = $row["first_login"];
         header("Location: dashboard.php");
         
     }  
@@ -25,5 +26,5 @@ include "config.php";
         echo '</script>';
     }     
 
-    $con->close();
+    $conn->close();
 ?>

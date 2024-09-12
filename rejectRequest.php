@@ -5,11 +5,12 @@ if (isset($_GET['requestId'])) {
     $requestId = $_GET['requestId'];
 
     // Fetch the user who made the request
-    $sql = "SELECT userId FROM toner_requests WHERE Request_id = $requestId";
+    $sql = "SELECT userId, TonerName FROM toner_requests WHERE Request_id = $requestId";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $request = $result->fetch_assoc();
+        $tonerName = $request['TonerName'];
         $userId = $request['userId']; // Get the user_id who made the request
 
         // Update the request status to 'Rejected'
@@ -17,7 +18,7 @@ if (isset($_GET['requestId'])) {
 
         if ($conn->query($updateRequestStatus) === TRUE) {
             // Insert notification for rejected request
-            $notificationContent = "Your request for toner has been rejected.";
+            $notificationContent = "Your request for $tonerName toner has been rejected.";
             $insertNotification = "INSERT INTO notifications (notification_content, user_notified, is_cleared) VALUES ('$notificationContent', $userId, 0)";
 
             if ($conn->query($insertNotification) === TRUE) {

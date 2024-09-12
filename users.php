@@ -61,6 +61,13 @@ $isCFO = $_SESSION["isCFO"];
             color: red;
             cursor: pointer;
         }
+        .add-users{
+            width: 40%;
+            margin: 6rem auto;
+        }
+        .add-users h3{
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -99,6 +106,9 @@ $isCFO = $_SESSION["isCFO"];
             </li>
             <?php } ?> 
             <li class="nav-item">
+              <a class="nav-link" href="edit_profile.php">Edit Profile</a>
+            </li>   
+            <li class="nav-item">
               <a class="nav-link" href="notifications.php">
                   <span class="notification-icon">
                       <i class='bx bxs-bell'><span id="notif-number"></span></i>
@@ -125,7 +135,17 @@ $isCFO = $_SESSION["isCFO"];
             </tr>
         </thead>
         <tbody></tbody>
-</table>
+    </table>
+    <div class="add-users">
+            <h3>Onboard Users</h3>
+            <form method="post" action="users.php">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">User's Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                </div>
+                <button type="submit" class="btn btn-primary" name="button">Add User</button>
+            </form>
+    </div>
 
 
 <script src="./js/users.js"></script>
@@ -134,3 +154,48 @@ $isCFO = $_SESSION["isCFO"];
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<?php 
+include "config.php";
+
+if (isset($_POST["button"])) {
+    // Validate the email input
+    $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo '<script type="text/JavaScript">'; 
+        echo 'alert("Invalid email address!")';
+        echo '</script>';  
+    } else {
+        // Prepare an SQL statement to prevent SQL injection
+        $sql = "INSERT INTO users (Firstname, Lastname, Email, Password, is_admin, isCFO, first_login) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+
+        
+        $firstName = '';
+        $lastName = '';
+        $password = '';
+        $id_admin = 0;
+        $isCFO = 0;
+        $firstLogin = 1;
+
+        // Bind parameters to the prepared statement
+        $stmt->bind_param("ssssiii", $firstName, $lastName, $email, $password, $id_admin, $isCFO, $firstLogin);
+
+        if ($stmt->execute()) {
+            echo '<script type="text/JavaScript">'; 
+            echo 'alert("User successfully onboarded!")';
+            echo '</script>';  
+        } else {
+            echo '<script type="text/JavaScript">'; 
+            echo 'alert("Error onboarding user: ' . $stmt->error . '")';
+            echo '</script>';  
+        }
+
+        // Close the statement and connection
+        $stmt->close();
+        $conn->close();
+    }
+}
+
+?>

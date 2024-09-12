@@ -98,6 +98,26 @@ $isCFO = $_SESSION["isCFO"];
         <!-- Notifications will be dynamically populated here -->
     </div>
 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          // Get the notification count from PHP
+          var notifCount = <?php echo $notif_count; ?>;
+
+          // Display the count in the span with id 'notif-number'
+          if(notifCount > 0) {
+              document.getElementById("notif-number").textContent = notifCount;
+              document.getElementById("notif-number").style.backgroundColor = "red";
+              document.getElementById("notif-number").style.color = "white";
+              document.getElementById("notif-number").style.borderRadius = "50%";
+              document.getElementById("notif-number").style.padding = ".1rem .3rem";
+              document.getElementById("notif-number").style.position = "absolute";
+              document.getElementById("notif-number").style.top = ".7rem";
+              document.getElementById("notif-number").style.right = "5rem";
+              document.getElementById("notif-number").style.fontSize = ".7rem";
+          }
+      });
+    </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>

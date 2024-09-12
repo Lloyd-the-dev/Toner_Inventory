@@ -5,14 +5,15 @@ if (isset($_GET['requestId'])) {
     $requestId = $_GET['requestId'];
 
     // Fetch the requested toner details and user who made the request
-    $sql = "SELECT Toner_id, RequestQuantity, userId FROM toner_requests WHERE Request_id = $requestId";
+    $sql = "SELECT Toner_id, RequestQuantity, userId, TonerName FROM toner_requests WHERE Request_id = $requestId";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $request = $result->fetch_assoc();
         $tonerId = $request['Toner_id'];
         $requestedQty = $request['RequestQuantity'];
-        $userId = $request['userId']; // Get the user_id who made the request
+        $tonerName = $request['TonerName'];
+        $userId = $request['userId']; // Get the userId who made the request
 
         // Update the toner inventory: reduce the quantity by the requested amount
         $updateInventory = "UPDATE toner_inventory SET TonerQuantity = TonerQuantity - $requestedQty WHERE Toner_id = $tonerId";
@@ -23,7 +24,7 @@ if (isset($_GET['requestId'])) {
 
             if ($conn->query($updateRequestStatus) === TRUE) {
                 // Insert notification for approved request
-                $notificationContent = "Your request for toner has been approved.";
+                $notificationContent = "Your request for $tonerName toner has been approved.";
                 $insertNotification = "INSERT INTO notifications (notification_content, user_notified, is_cleared) VALUES ('$notificationContent', $userId, 0)";
 
                 if ($conn->query($insertNotification) === TRUE) {

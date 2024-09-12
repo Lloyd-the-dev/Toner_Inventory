@@ -24,7 +24,9 @@ fetch('tonerDisplay.php')
     .catch(error => console.error('Error fetching data:', error));
 
    
-document.getElementById('submitRequest').addEventListener('click', () => {
+document.getElementById('submitRequest').addEventListener('click', (event) => {
+
+    event.preventDefault();
     const form = document.getElementById('tonerRequestForm');
     const formData = new FormData(form);
 
